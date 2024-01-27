@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
-@RestController
 @RequestMapping("v1/wallet/")
 public interface WalletControllerApi {
 

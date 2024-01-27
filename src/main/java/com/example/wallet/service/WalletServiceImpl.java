@@ -1,5 +1,6 @@
 package com.example.wallet.service;
 
+import com.example.wallet.model.Wallet;
 import com.example.wallet.repo.WalletRepo;
 import com.example.wallet.rest.dto.BalanceResponse;
 import com.example.wallet.rest.dto.OperationRequest;
@@ -17,7 +18,13 @@ public class WalletServiceImpl implements WalletService {
     @Override
     @Transactional
     public void topBalance(OperationRequest operationRequest) {
+        Wallet wallet = repo.findById(operationRequest.getWalletId()).orElseThrow();
+        if(operationRequest.getOperationType() == OperationRequest.OperationType.DEPOSIT){
+            wallet.setBalance( wallet.getBalance() + operationRequest.getAmount());
+        }else {
+            wallet.setBalance(wallet.getBalance() - operationRequest.getAmount());
 
+        }
     }
 
     @Override
